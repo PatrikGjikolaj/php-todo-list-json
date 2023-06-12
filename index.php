@@ -37,7 +37,7 @@
                                     <span>
                                         {{ list.name }} , {{ list.description }} :
                                         <span v-if="list.status==false" class="text-danger">{{ list.status }} &cross;</span> 
-                                        <span v-if="list.status==true" class="text-success">{{ list.status }} &#10003;</span> 
+                                        <span v-else class="text-success">{{ list.status }} &#10003;</span> 
                                     </span>
                                 </li>
                             </template>
