@@ -1,32 +1,40 @@
 <?php
 
-$toDo = [
-    [
-        'name' => 'Lavatrice',
-        'description' => 'Fare la lavatrice',
-        'status' => true,
-    ],
-    [
-        'name' => 'Cucinare',
-        'description' => 'Fare da mangiare',
-        'status' => false,
-    ],
-    [
-        'name' => 'Pulire',
-        'description' => 'Fare le pulizie',
-        'status' => false,
-    ],
-    [
-        'name' => 'Bollette',
-        'description' => 'Pagare le bollette',
-        'status' => true,
-    ],
-];
-
 header('Content-Type: application/json');
 
-$stringaConDati = json_encode($toDo);
+$toDo = file_get_contents("dati.json");
 
-echo $stringaConDati;
+$todoListDati = json_decode($toDo, true);
+
+
+if( isset($_POST['newTask']) ) {
+
+    $taskName = $_POST["newTask"];
+
+    $newTaskObj = array (
+        'name' => $taskName,
+        'description' => 'taskDescription',
+        'status' => false
+    );
+
+    $todoListDati[] = $newTaskObj;
+    file_put_contents("dati.json", json_encode($todoListDati) );
+
+} else if( isset($_POST['deleteAll']) ) {
+
+    $todoListDati = [];
+    file_put_contents("dati.json", json_encode($todoListDati) );
+
+} else if( isset($_POST['deleteIndex'] )) {
+
+    $indice = $_POST['deleteIndex'];
+    $todoListDati[$indice] = "ELIMINATO";
+    file_put_contents("dati.json", json_encode($todoListDati) );
+
+}
+
+$toDo = json_encode($todoListDati);
+
+echo $toDo;
 
 ?>

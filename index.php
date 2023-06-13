@@ -12,38 +12,42 @@
     <div id="app">
         <div class="container-fluid bg-primary py-5" style="height: 100vh;">
             <div class="container bg-white py-5">
-                <div class="row gap-5">
-                    <div class="col-12 text-center">
+                <div class="row">
+                    <div class="col-12 text-center my-3">
                         <h1 class="fw-bold text-danger">ToDoList</h1>
                     </div>
                     <div class="col-12 text-center">
-                    <button class="btn btn-primary" @click="chiamata">Clicca per generare la lista</button>
+                        <button class="btn btn-primary mx-1" @click="chiamata">Clicca per generare la lista</button>
+                        <button class="btn btn-danger mx-1" @click="deleteAllTasks">Elimina tutte le task</button>
+                        <div class="col-auto my-3 text-start">
+                            <ul>
+                                <template v-for="(list, c) in toDo">
+                                    <li @click="deleteItem(c)">
+                                        <span>
+                                            {{ list.name }} , {{ list.description }} :
+                                            <span v-if="list.status==false" class="text-danger">{{ list.status }} &cross;</span> 
+                                            <span v-else class="text-success">{{ list.status }} &#10003;</span> 
+                                        </span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center my-5">
+                        <div class="col-8 m-auto">
+                            <label for="">Inserisci il titolo della task</label>
+                            <input class="form-control mb-3" type="text" placeholder="Titolo" aria-label="default input example" v-model="newTask">
+                        </div>
+                        <div class="col-8 m-auto">
+                            <label for="exampleFormControlTextarea1" class="form-label">Inserisci una breve descrizione della task</label>
+                            <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-success" @click="addNewTask">Clicca per aggiungere una nuova task</button>
                     </div>
                 </div>
-                <div class="row my-5">
-                    <div class="col-6">
-                        <ul>
-                            <template v-for="element in toDo">
-                                <li>
-                                    <span>{{ element.name }}</span>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul>
-                            <template v-for="list in toDoBtn">
-                                <li>
-                                    <span>
-                                        {{ list.name }} , {{ list.description }} :
-                                        <span v-if="list.status==false" class="text-danger">{{ list.status }} &cross;</span> 
-                                        <span v-else class="text-success">{{ list.status }} &#10003;</span> 
-                                    </span>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
-                </div>
+                <!-- <div class="row my-5"> -->
+
+                <!-- </div> -->
             </div>
         </div>
     </div>
