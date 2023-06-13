@@ -24,9 +24,8 @@
                                 <template v-for="(list, c) in toDo">
                                     <li @click="deleteItem(c)">
                                         <span>
-                                            {{ list.name }} , {{ list.description }} :
-                                            <span v-if="list.status==false" class="text-danger">{{ list.status }} &cross;</span> 
-                                            <span v-else class="text-success">{{ list.status }} &#10003;</span> 
+                                            <span v-if="list.status==false" class="text-succes"> {{ list.name }} {{ list.status }}</span> 
+                                            <span v-else class="text-danger"><del>{{ list.name }} {{ list.status }}</del></span> 
                                         </span>
                                     </li>
                                 </template>
@@ -38,16 +37,9 @@
                             <label for="">Inserisci il titolo della task</label>
                             <input class="form-control mb-3" type="text" placeholder="Titolo" aria-label="default input example" v-model="newTask">
                         </div>
-                        <div class="col-8 m-auto">
-                            <label for="exampleFormControlTextarea1" class="form-label">Inserisci una breve descrizione della task</label>
-                            <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
                         <button class="btn btn-success" @click="addNewTask">Clicca per aggiungere una nuova task</button>
                     </div>
                 </div>
-                <!-- <div class="row my-5"> -->
-
-                <!-- </div> -->
             </div>
         </div>
     </div>

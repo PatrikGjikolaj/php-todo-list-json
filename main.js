@@ -40,7 +40,7 @@ createApp({
             }).then((response) => {
                 console.log("Dati ricevuti: ", response.data);
                 this.toDo = response.data;
-                this.newTask = [];
+                this.newTask = "";
             });
     }},
     mounted() {

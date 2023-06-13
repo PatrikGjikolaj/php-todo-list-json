@@ -13,7 +13,6 @@ if( isset($_POST['newTask']) ) {
 
     $newTaskObj = array (
         'name' => $taskName,
-        'description' => 'taskDescription',
         'status' => false
     );
 
@@ -28,7 +27,7 @@ if( isset($_POST['newTask']) ) {
 } else if( isset($_POST['deleteIndex'] )) {
 
     $indice = $_POST['deleteIndex'];
-    $todoListDati[$indice] = "ELIMINATO";
+    array_splice($todoListDati,$indice,1);
     file_put_contents("dati.json", json_encode($todoListDati) );
 
 }
